@@ -1,0 +1,6 @@
+language: swift
+os: osx
+osx_image: xcode8.3
+script:
+  - xcodebuild -project HigherKinded.xcodeproj
+  - ./build/Release/HigherKinded
