@@ -36,3 +36,18 @@ extension Newtype2 {
         return App2(self)
     }
 }
+
+protocol Newtype3 {
+    associatedtype T: Constructor
+    associatedtype A
+    associatedtype B
+    associatedtype C
+    
+    func inj() -> App3<T, A, B, C>
+}
+
+extension Newtype3 {
+    func inj() -> App3<T, A, B, C> {
+        return App3(self)
+    }
+}

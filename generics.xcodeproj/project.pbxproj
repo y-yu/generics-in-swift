@@ -12,6 +12,7 @@
 		4B19E2FA21C237FC00628B94 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B19E2F921C237FC00628B94 /* Array.swift */; };
 		4B19E2FE21C23A6100628B94 /* Optional.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B19E2FD21C23A6100628B94 /* Optional.swift */; };
 		4B19E30421C24EEF00628B94 /* HList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B19E30321C24EEF00628B94 /* HList.swift */; };
+		4B4E7FB721E334A2008C3231 /* HListUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B4E7FB621E334A2008C3231 /* HListUtil.swift */; };
 		4B81930121C22B7700B4FE86 /* Not.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B81930021C22B7700B4FE86 /* Not.swift */; };
 		E8334E771F3ADA8800A55510 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8334E761F3ADA8800A55510 /* main.swift */; };
 		E8334E801F3ADB1100A55510 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8334E7F1F3ADB1100A55510 /* App.swift */; };
@@ -36,6 +37,7 @@
 		4B19E2F921C237FC00628B94 /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
 		4B19E2FD21C23A6100628B94 /* Optional.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Optional.swift; sourceTree = "<group>"; };
 		4B19E30321C24EEF00628B94 /* HList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HList.swift; sourceTree = "<group>"; };
+		4B4E7FB621E334A2008C3231 /* HListUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HListUtil.swift; sourceTree = "<group>"; };
 		4B81930021C22B7700B4FE86 /* Not.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Not.swift; sourceTree = "<group>"; };
 		E8334E731F3ADA8800A55510 /* generics */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = generics; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8334E761F3ADA8800A55510 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
@@ -54,15 +56,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		4B8192FF21C229A300B4FE86 /* higherkind */ = {
+		4B4E7FB521E3340E008C3231 /* data */ = {
 			isa = PBXGroup;
 			children = (
 				4B19E30321C24EEF00628B94 /* HList.swift */,
+			);
+			path = data;
+			sourceTree = "<group>";
+		};
+		4B8192FF21C229A300B4FE86 /* higherkind */ = {
+			isa = PBXGroup;
+			children = (
 				E8334E7F1F3ADB1100A55510 /* App.swift */,
 				E8334E811F3ADB7200A55510 /* Newtype.swift */,
 				4B19E2F521C22E7D00628B94 /* Constructor.swift */,
 				4B19E2F921C237FC00628B94 /* Array.swift */,
 				4B19E2FD21C23A6100628B94 /* Optional.swift */,
+				4B4E7FB621E334A2008C3231 /* HListUtil.swift */,
 			);
 			path = higherkind;
 			sourceTree = "<group>";
@@ -86,6 +96,7 @@
 		E8334E751F3ADA8800A55510 /* generics */ = {
 			isa = PBXGroup;
 			children = (
+				4B4E7FB521E3340E008C3231 /* data */,
 				4B8192FF21C229A300B4FE86 /* higherkind */,
 				E8334E761F3ADA8800A55510 /* main.swift */,
 				4B81930021C22B7700B4FE86 /* Not.swift */,
@@ -126,6 +137,7 @@
 				TargetAttributes = {
 					E8334E721F3ADA8800A55510 = {
 						CreatedOnToolsVersion = 8.1;
+						LastSwiftMigration = 1010;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -152,6 +164,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4B4E7FB721E334A2008C3231 /* HListUtil.swift in Sources */,
 				4B19E30421C24EEF00628B94 /* HList.swift in Sources */,
 				E8334E821F3ADB7200A55510 /* Newtype.swift in Sources */,
 				4B19E2FE21C23A6100628B94 /* Optional.swift in Sources */,
@@ -259,7 +272,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -267,7 +281,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};

@@ -21,3 +21,11 @@ class App2<T, A, B> {
         underlying = a
     }
 }
+
+class App3<T, A, B, C> {
+    var underlying: Any
+    
+    init(_ a: Any) {
+        underlying = a
+    }
+}
