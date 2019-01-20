@@ -34,23 +34,18 @@ extension App3: HAppend where T == HAppendConstructor, A == HNil, B: HList, B ==
         return l2
     }
 }
+ 
 
 extension App3 : HAppend where T == HAppendConstructor, A: HList, B: HList, C: HList {
+    
+    
+    typealias X = Any
     typealias Left = HCons<X, A>
     typealias Right = B
     typealias Result = HCons<X, C>
     
-    class ConcreatHAppend: HAppend {
-        typealias Left = A
-        typealias Right = B
-        typealias Result = C
-        
-        static func append(l1: HCons<X, A>, l2: B) -> HCons<X, C>
-    }
-    
-    static func append(l1: HCons<X, A>, l2: B) -> HCons<X, C> {
-        let ev: HAppend<A, B, C> = HAppend()
-        return HCons(l1.head, HAppend.append(l1: l1.tail, l2: l2))
+    static func append(_ l1: HCons<X, A>, _ l2: B) -> HCons<X, C> {
+        return HCons(l1.head, App3<T, A, B, C>.append(l1.tail, l2))
     }
 }
 
