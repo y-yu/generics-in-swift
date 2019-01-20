@@ -1,7 +1,7 @@
 class HNilConstructor: Constructor { }
 class HConsConstructor: Constructor { }
 
-class HAppendConstructor: Constructor { }
+class HAppendConstructor: Constructor {}
 
 extension HNil: Newtype0 {
     typealias T = HNilConstructor
@@ -25,24 +25,32 @@ extension App2 where T: HConsConstructor, B: HList {
     }
 }
 
-
-extension App3: HAppendNil where T == HAppendConstructor, A == HNil, B: HList, B == C {
+extension App3: HAppend where T == HAppendConstructor, A == HNil, B: HList, B == C {
     typealias Left = A
     typealias Right = B
     typealias Result = C
     
-    static func append(l1: HNil, l2: Right) -> Result {
+    func append(_ l1: HNil, _ l2: B) -> C {
         return l2
     }
 }
- 
-extension App3: HAppendCons where T == HAppendConstructor, A: HList, B: HList, C: HList {
-    typealias X = Any
+
+extension App3 : HAppend where T == HAppendConstructor, A: HList, B: HList, C: HList {
     typealias Left = HCons<X, A>
     typealias Right = B
     typealias Result = HCons<X, C>
     
+    class ConcreatHAppend: HAppend {
+        typealias Left = A
+        typealias Right = B
+        typealias Result = C
+        
+        static func append(l1: HCons<X, A>, l2: B) -> HCons<X, C>
+    }
+    
     static func append(l1: HCons<X, A>, l2: B) -> HCons<X, C> {
-        return HCons(l1.head, HAppend<A, B, C>.append(l1: l1.tail, l2: l2))
+        let ev: HAppend<A, B, C> = HAppend()
+        return HCons(l1.head, HAppend.append(l1: l1.tail, l2: l2))
     }
 }
+

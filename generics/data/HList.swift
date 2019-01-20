@@ -13,14 +13,15 @@ public struct HCons<H, L: HList>: HList {
     }
 }
 
-protocol HAppendNil {
+protocol HAppend {
     associatedtype Left: HList
     associatedtype Right: HList
     associatedtype Result: HList
     
-    static func append(l1: Left, l2: Right) -> Result
+    static func append(_ l1: Left, _ l2: Right) -> Result
 }
 
+/*
 protocol HAppendCons {
     associatedtype Left: HList
     associatedtype Right: HList
@@ -28,3 +29,4 @@ protocol HAppendCons {
     
     static func append(l1: Left, l2: Right) -> Result
 }
+*/
