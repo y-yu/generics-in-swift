@@ -12,27 +12,27 @@ extension Newtype0 {
 
 protocol Newtype1 {
     associatedtype T: Constructor
-    associatedtype A
+    associatedtype X
     
-    func inj() -> App1<T, A>
+    func inj() -> App1<T, X>
 }
 
 extension Newtype1 {
-    func inj() -> App1<T, A> {
+    func inj() -> App1<T, X> {
         return App1(self)
     }
 }
 
 protocol Newtype2 {
     associatedtype T: Constructor
-    associatedtype A
-    associatedtype B
+    associatedtype X
+    associatedtype Y
     
-    func inj() -> App2<T, A, B>
+    func inj() -> App2<T, X, Y>
 }
 
 extension Newtype2 {
-    func inj() -> App2<T, A, B> {
+    func inj() -> App2<T, X, Y> {
         return App2(self)
     }
 }

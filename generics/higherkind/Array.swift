@@ -2,7 +2,7 @@ class ArrayConstructor: Constructor { }
 
 extension Array: Newtype1 {
     typealias T = ArrayConstructor
-    typealias A = Element
+    typealias X = Element
 }
 
 extension App1 where T: ArrayConstructor {

@@ -1,18 +1,56 @@
-public protocol HList { }
-public struct HNil: HList {
-    init() { }
+protocol HList {
+    associatedtype Head
+    associatedtype Tail: HList
 }
 
-public struct HCons<H, L: HList>: HList {
-    public let head: H
-    public let tail: L
+public enum Nothing { }
+
+struct HNil: HList {
+    typealias Head = Nothing
+    typealias Tail = HNil
     
-    public init(_ h: H, _ t: L) {
+    init() { }
+
+    static var hNil = HNil()
+}
+
+protocol HConsProtocol: HList { }
+
+struct HCons<Head, Tail: HList>: HConsProtocol {
+    let head: Head
+    let tail: Tail
+    
+    init(_ h: Head, _ t: Tail) {
         self.head = h
         self.tail = t
     }
 }
 
+class App6<T, A, B, C, D, E, F> {
+    var underlying: Any
+    
+    init(_ a: A, _ b: B) {
+        underlying = a
+    }
+}
+
+extension App6 where T == HAppendConstructor, A == HNil, B: HList, C == B, D == Nothing, E == HNil {
+    func hAppend(_ l1: HNil, _ l2: B) -> B {
+        return l2
+    }
+}
+
+extension App6 where T == HAppendConstructor, A == HCons<D, E>, B: HList, C == HCons<D, F>, E: HList, F: HList {
+    //class HAppendPred: App6<T, E, B, F, E.Head, E.Tail, F.Tail> {  }
+    
+    func hAppend(_ l1: HCons<D, E>, _ l2: B) -> HCons<D, F> {
+        var tmp = App6<T, E, B, F, E.Head, E.Tail, F.Tail>(l1.tail, l2)
+        
+        return HCons(l1.head, tmp.hAppend(l1.tail, l2))
+    }
+}
+
+/*
 protocol HAppend {
     associatedtype Left: HList
     associatedtype Right: HList
@@ -21,6 +59,13 @@ protocol HAppend {
     static func append(_ l1: Left, _ l2: Right) -> Result
 }
 
+/*
+
+protocol HAppendNil: HAppend where Left == HNil, Result == Right { }
+
+protocol HAppendCons: HAppend { }
+*/
+ 
 /*
 protocol HAppendCons {
     associatedtype Left: HList

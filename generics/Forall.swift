@@ -1,3 +1,6 @@
+/*
+class Forall<A> { }
+
 protocol Forall0 {
     associatedtype T: Constructor
     
@@ -28,3 +31,5 @@ extension HCons: Forall1Cons {
         return HCons<A, HCons<H, L>>(a, self).inj()
     }
 }
+
+*/
