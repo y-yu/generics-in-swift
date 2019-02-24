@@ -30,6 +30,7 @@ class App3<T, A, B, C> {
     }
 }
 
+/*
 class App4<T, A, B, C, D> {
     var underlying: Any
     
@@ -37,6 +38,7 @@ class App4<T, A, B, C, D> {
         underlying = a
     }
 }
+*/
 
 class App5<T, A, B, C, D, E> {
     var underlying: Any
