@@ -10,6 +10,7 @@ extension Newtype0 {
     }
 }
 
+/*
 protocol Newtype1 {
     associatedtype T: Constructor
     associatedtype X
@@ -22,6 +23,7 @@ extension Newtype1 {
         return App1(self)
     }
 }
+*/
 
 protocol Newtype2 {
     associatedtype T: Constructor

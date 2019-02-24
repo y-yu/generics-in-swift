@@ -46,20 +46,41 @@ protocol HAppend2 {
 */
 
 protocol App4Protocol {
-    associatedtype A
-    associatedtype B
-    associatedtype C
+    associatedtype A: HList
+    associatedtype B: HList
+    associatedtype C: HList
     associatedtype D
 }
 
-class App4<A, B, C, D>: App4Protocol {
+protocol App1Protocol {
+    associatedtype A: HList
+}
+
+class App1<A: HList>: App1Protocol {
+    init() {}
+}
+
+/*
+class App5<D, EV: HAppend>: App5Protocol {
+    typealias A = HCons<D, EV.Left>
+    typealias B = EV.Right
+    typealias C = HCons<D, EV.Result>
+    
     var underlying: Any
     
     init(_ a: A, _ b: B) {
         underlying = a
     }
 }
+*/
+class App4<A: HList, B: HList, C: HList, D>: App4Protocol {
+    init() {}
+}
 
+class BoxWithEV<EV: HAppend, X: App4Protocol> { }
+
+
+/*
 class AbstractBox<X: App4Protocol> {
     init() {}
 }
@@ -67,7 +88,8 @@ class AbstractBox<X: App4Protocol> {
 class Box<X: App4Protocol>: AbstractBox<X> { }
 
 class BoxWithEV<EV: HAppend, X: App4Protocol>: AbstractBox<X> { }
-
+*/
+ 
 protocol HAppend {
     associatedtype Left: HList
     associatedtype Right: HList
@@ -76,17 +98,17 @@ protocol HAppend {
     static func append(_ l1: Left, _ l2: Right) -> Result
 }
 
-extension Box: HAppend where X.A == HNil, X.B: HList, X.C == X.B {
-    typealias Right = X.B
-    typealias Left = X.A
-    typealias Result = X.B
+extension App1: HAppend where A: HList {
+    typealias Left = HNil
+    typealias Right = A
+    typealias Result = A
     
-    static func append(_ l1: X.A, _ l2: X.B) -> X.B {
+    static func append(_ l1: HNil, _ l2: A) -> A {
         return l2
     }
 }
 
-extension BoxWithEV: HAppend where X.A == HCons<X.D, EV.Left>, EV.Right == X.B, X.C == HCons<X.D, EV.Result>  {
+extension BoxWithEV: HAppend where X.A == HCons<X.D, EV.Left>, X.B == EV.Right, X.C == HCons<X.D, EV.Result> {
     typealias Left = X.A
     typealias Right = X.B
     typealias Result = X.C
