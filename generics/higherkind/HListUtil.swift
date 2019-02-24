@@ -3,7 +3,7 @@ class HListConstructor: Constructor { }
 class HNilConstructor: HListConstructor { }
 class HConsConstructor: HListConstructor { }
  
-class HAppendConstructor: HListConstructor {}
+class HAppendConstructor: Constructor {}
 
 extension HNil: Newtype2 {
     typealias T = HNilConstructor
