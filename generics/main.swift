@@ -28,50 +28,15 @@ typealias AppC = App1<B>
 
 //let app = AppA(a, b)
 
-class Either<A, B> {}
-
-class Left<A>: Either<A, Nothing> {}
-class Right<A>: Either<Nothing, A> {}
-
-protocol GetEVNil {
-    associatedtype Pred = Either<GetEVNil, GetEVHCons>
-    associatedtype EV: HAppend
-    associatedtype Right1: HList
-}
-
-protocol GetEVHCons {
-    associatedtype Pred: Either<GetEVNil, GetEVHCons>
-    associatedtype EV: HAppend
-    associatedtype Left: HList
-    associatedtype Right2: HList
-    associatedtype X
-}
-
-extension Impl: GetEVHNil where A == HNil {
-    typealias Right1 = B
-    typealias Pred = Impl
-    typealias EV = App1<B>
-}
-
-struct Impl<A: HList, B: HList, C> {}
-
-extension Impl: GetEVHCons where A: HList {
-    typealias Left = HNil
-    typealias Right2 = B
-    typealias X = C
-    typealias Pred = Impl<A.Tail, B, A.Head>
-    typealias EV = BoxWithEV<Pred.EV, App4<HCons<C, A>, B, HCons<C, Pred.EV.Result>, C>>
-    
-    func get() -> EV {
-        return EV()
-    }
-}
-
-
 //let tmp = Impl<AA, B, String>.get()
 
+/*
+func makeBox<A: App4Protocol, H: HAppend>(_ a: A) -> H {
+    return 
+}
+*/
 
-let append = BoxWithEV<BoxWithEV<AppC, AppB>, AppA>.append(a, b)
+let append = BoxWithEV<BoxWithEV<AppC, AppB>, AppA>.PredEV.append(aa, b)
 print(append)
 
 //let append = BoxWithEV<BoxWithEV<Box<AppC>, AppB>, AppA>

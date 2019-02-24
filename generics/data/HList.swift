@@ -60,24 +60,23 @@ class App1<A: HList>: App1Protocol {
     init() {}
 }
 
-/*
-class App5<D, EV: HAppend>: App5Protocol {
-    typealias A = HCons<D, EV.Left>
-    typealias B = EV.Right
-    typealias C = HCons<D, EV.Result>
-    
-    var underlying: Any
-    
-    init(_ a: A, _ b: B) {
-        underlying = a
-    }
+extension App1: HasPredEV {
+    typealias PredEV = App1<B>
 }
-*/
+
+protocol HasPredEV {
+    associatedtype PredEV: HAppend
+}
+
 class App4<A: HList, B: HList, C: HList, D>: App4Protocol {
     init() {}
 }
 
-class BoxWithEV<EV: HAppend, X: App4Protocol> { }
+class BoxWithEV<EV: HAppend, X: App4Protocol> {}
+
+extension BoxWithEV: HasPredEV where EV: HasPredEV, X.A == HCons<X.D, EV.Left>, X.B == EV.Right {
+    typealias PredEV = BoxWithEV<EV.PredEV, App4<X.A, X.B, X.C, X.D>>
+}
 
 
 /*
