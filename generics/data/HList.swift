@@ -60,24 +60,28 @@ class App1<A: HList>: App1Protocol {
     init() {}
 }
 
-extension App1: HasPredEV {
-    typealias PredEV = App1<B>
-}
-
-protocol HasPredEV {
-    associatedtype PredEV: HAppend
-}
-
 class App4<A: HList, B: HList, C: HList, D>: App4Protocol {
     init() {}
 }
 
-class BoxWithEV<EV: HAppend, X: App4Protocol> {}
 
-extension BoxWithEV: HasPredEV where EV: HasPredEV, X.A == HCons<X.D, EV.Left>, X.B == EV.Right {
-    typealias PredEV = BoxWithEV<EV.PredEV, App4<X.A, X.B, X.C, X.D>>
+class App4a<A: HList, B: HList, C: HList, D>: App4Protocol {
+    init() {}
 }
 
+extension App4 where A == HNil {
+    typealias EV = App1<B>
+    
+    static func make() -> App1<B> {
+        return App1<B>()
+    }
+}
+
+extension App4a where A == HCons<Any, HNil> {
+    typealias EV = BoxWithEV<App4.EV, App4<A.Tail, B, C.Tail, A.Head>>
+}
+
+class BoxWithEV<EV: HAppend, X: App4Protocol> {}
 
 /*
 class AbstractBox<X: App4Protocol> {
@@ -107,6 +111,18 @@ extension App1: HAppend where A: HList {
     }
 }
 
+extension BoxWithEV: HAppend where EV.Left == X.A, X.B == EV.Right, X.C == EV.Result {
+    typealias Left = HCons<X.D, X.A>
+    typealias Right = X.B
+    typealias Result = HCons<X.D, X.C>
+    typealias EV = EV
+    
+    static func append(_ l1: HCons<X.D, X.A>, _ l2: X.B) -> HCons<X.D, X.C> {
+        return HCons(l1.head, EV.append(l1.tail, l2))
+    }
+}
+
+/*
 extension BoxWithEV: HAppend where X.A == HCons<X.D, EV.Left>, X.B == EV.Right, X.C == HCons<X.D, EV.Result> {
     typealias Left = X.A
     typealias Right = X.B
@@ -116,6 +132,8 @@ extension BoxWithEV: HAppend where X.A == HCons<X.D, EV.Left>, X.B == EV.Right, 
         return HCons(l1.head, EV.append(l1.tail, l2))
     }
 }
+*/
+
 
 /*
 extension App6: HAppend where T == HAppendConstructor, A == HNil, B: HList, C == B, D == Nothing, E == HNil, F: HList {

@@ -22,9 +22,11 @@ typealias BB = HCons<Double, HNil>
 typealias B = HCons<Bool, BB>
 typealias CC = HCons<String, B>
 typealias C = HCons<Int, CC>
-typealias AppA = App4<A, B, C, Int>
-typealias AppB = App4<AA, B, CC, String>
+//typealias AppA = App4<A, B, C, Int>
+//typealias AppB = App4<AA, B, CC, String>
 typealias AppC = App1<B>
+typealias AppA = App4<AA, B, CC, Int>
+typealias AppB = App4<HNil, B, B, String>
 
 //let app = AppA(a, b)
 
@@ -36,7 +38,7 @@ func makeBox<A: App4Protocol, H: HAppend>(_ a: A) -> H {
 }
 */
 
-let append = BoxWithEV<BoxWithEV<AppC, AppB>, AppA>.PredEV.append(aa, b)
+let append = BoxWithEV<BoxWithEV<AppC, AppB>, AppA>.append(a, b)
 print(append)
 
 //let append = BoxWithEV<BoxWithEV<Box<AppC>, AppB>, AppA>
