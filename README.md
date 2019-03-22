@@ -4,7 +4,7 @@ PoC of Generics in protocol/extension
 [![Build Status](https://travis-ci.org/y-yu/generics-in-swift.svg?branch=master)](https://travis-ci.org/y-yu/generics-in-swift)
 
 This is a proof of the concept of [Generics in protocol/extension](https://github.com/y-yu/try-swift-slide) on
-[try! Swift Tokyo 2019](https://www.tryswift.co/events/2019/tokyo/jp/#).
+[try! Swift Tokyo 2019](https://www.tryswift.co/events/2019/tokyo/en/#).
 
 ## Difference of the presentation's code
 
